@@ -1,6 +1,6 @@
 import React from 'react';
 import { Users, Square, Wifi, Coffee, Car, Tv } from 'lucide-react';
-import { Room } from '../types';
+import type { Room } from '../types';
 
 interface RoomCardProps {
   room: Room;

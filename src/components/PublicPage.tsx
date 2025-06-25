@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Search, Filter, MapPin, Star } from 'lucide-react';
-import { Room } from '../types';
+import type { Room } from '../types';
 import { RoomCard } from './RoomCard';
 
 interface PublicPageProps {

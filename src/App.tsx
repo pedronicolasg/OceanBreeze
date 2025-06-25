@@ -1,13 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { Header } from './components/Header';
-import { PublicPage } from './components/PublicPage';
-import { LoginPage } from './components/LoginPage';
-import { AdminDashboard } from './components/AdminDashboard';
-import { Room, View } from './types';
-import { getStoredRooms, saveRooms, getAuthStatus, setAuthStatus } from './utils/storage';
+import { useState, useEffect } from "react";
+import { Header } from "./components/Header";
+import { PublicPage } from "./components/PublicPage";
+import { LoginPage } from "./components/LoginPage";
+import { AdminDashboard } from "./components/AdminDashboard";
+import type { Room, View } from "./types";
+import {
+  getStoredRooms,
+  saveRooms,
+  getAuthStatus,
+  setAuthStatus,
+} from "./utils/storage";
 
 function App() {
-  const [currentView, setCurrentView] = useState<View>('public');
+  const [currentView, setCurrentView] = useState<View>("public");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [rooms, setRooms] = useState<Room[]>([]);
 
@@ -20,28 +25,28 @@ function App() {
     if (success) {
       setIsAuthenticated(true);
       setAuthStatus(true);
-      setCurrentView('admin');
+      setCurrentView("admin");
     }
   };
 
   const handleLogout = () => {
     setIsAuthenticated(false);
     setAuthStatus(false);
-    setCurrentView('public');
+    setCurrentView("public");
   };
 
   const handleNavigate = (view: View) => {
-    if (view === 'admin' && !isAuthenticated) {
-      setCurrentView('login');
+    if (view === "admin" && !isAuthenticated) {
+      setCurrentView("login");
     } else {
       setCurrentView(view);
     }
   };
 
-  const handleAddRoom = (roomData: Omit<Room, 'id'>) => {
+  const handleAddRoom = (roomData: Omit<Room, "id">) => {
     const newRoom: Room = {
       ...roomData,
-      id: Date.now().toString()
+      id: Date.now().toString(),
     };
     const updatedRooms = [...rooms, newRoom];
     setRooms(updatedRooms);
@@ -49,7 +54,7 @@ function App() {
   };
 
   const handleUpdateRoom = (updatedRoom: Room) => {
-    const updatedRooms = rooms.map(room => 
+    const updatedRooms = rooms.map((room) =>
       room.id === updatedRoom.id ? updatedRoom : room
     );
     setRooms(updatedRooms);
@@ -57,8 +62,8 @@ function App() {
   };
 
   const handleDeleteRoom = (roomId: string) => {
-    if (window.confirm('Tem certeza que deseja excluir este quarto?')) {
-      const updatedRooms = rooms.filter(room => room.id !== roomId);
+    if (window.confirm("Tem certeza que deseja excluir este quarto?")) {
+      const updatedRooms = rooms.filter((room) => room.id !== roomId);
       setRooms(updatedRooms);
       saveRooms(updatedRooms);
     }
@@ -73,11 +78,11 @@ function App() {
         onLogout={handleLogout}
       />
 
-      {currentView === 'public' && <PublicPage rooms={rooms} />}
-      
-      {currentView === 'login' && <LoginPage onLogin={handleLogin} />}
-      
-      {currentView === 'admin' && isAuthenticated && (
+      {currentView === "public" && <PublicPage rooms={rooms} />}
+
+      {currentView === "login" && <LoginPage onLogin={handleLogin} />}
+
+      {currentView === "admin" && isAuthenticated && (
         <AdminDashboard
           rooms={rooms}
           onAddRoom={handleAddRoom}

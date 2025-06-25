@@ -1,4 +1,4 @@
-import { Room } from '../types';
+import type { Room } from '../types';
 
 const STORAGE_KEY = 'oceanbreeze_quartoskey';
 const AUTH_KEY = 'oceanbreeze_loginkey';

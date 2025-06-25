@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { X, Plus, Minus } from 'lucide-react';
-import { Room } from '../types';
+import type { Room } from '../types';
 
 interface RoomFormProps {
   room?: Room;

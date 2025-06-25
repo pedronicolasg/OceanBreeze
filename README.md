@@ -6,7 +6,7 @@
 
 ### Sistema de Gerenciamento de Quartos de Hotel
 
-[![React](https://img.shields.io/badge/React-18.3.1-61DAFB?style=for-the-badge&logo=react&logoColor=white)](https://reactjs.org/) [![TypeScript](https://img.shields.io/badge/TypeScript-5.5.3-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/) [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.1-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/) [![Vite](https://img.shields.io/badge/Vite-5.4.2-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![React](https://img.shields.io/badge/React-19.1.0-61DAFB?style=for-the-badge&logo=react&logoColor=white)](https://reactjs.org/) [![TypeScript](https://img.shields.io/badge/TypeScript-5.8.3-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/) [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.1.10-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/) [![Vite](https://img.shields.io/badge/Vite-7.0.0-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
 
 </div>
 
@@ -100,7 +100,7 @@ O **Ocean Breeze** é um sistema CRUD (Create, Read, Update, Delete) para gerenc
 │   └── main.tsx          # Ponto de entrada
 ├── index.html            # HTML principal
 ├── package.json          # Dependências e scripts
-├── tailwind.config.js    # Configuração do Tailwind CSS
+├── postcss.config.mjs    # Configuração do POST CSS
 ├── tsconfig.json         # Configuração do TypeScript
 └── vite.config.ts        # Configuração do Vite
 ```

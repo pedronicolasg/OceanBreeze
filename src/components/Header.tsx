@@ -1,6 +1,6 @@
 import React from 'react';
 import { LogOut, Shield } from 'lucide-react';
-import { View } from '../types';
+import type { View } from '../types';
 
 interface HeaderProps {
   currentView: View;
