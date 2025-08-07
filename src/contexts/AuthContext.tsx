@@ -49,12 +49,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       const users = JSON.parse(localStorage.getItem('oceanbreeze_users') || '[]');
       
-      // Verificar se usuário já existe
       if (users.some((u: User) => u.username === userData.username || u.email === userData.email)) {
         return false;
       }
 
-      // Initialize demo users if this is the first registration
       if (users.length === 0) {
         const demoUsers = [
           {

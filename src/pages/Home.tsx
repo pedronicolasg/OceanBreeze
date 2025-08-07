@@ -26,7 +26,6 @@ const Home: React.FC = () => {
     if (!searchDates.checkIn) {
       setSearchDates({ checkIn: today, checkOut: tomorrow });
     }
-    // Show all rooms initially
     setDisplayRooms(rooms);
   }, [rooms]);
 

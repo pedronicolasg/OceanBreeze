@@ -33,7 +33,6 @@ const Register: React.FC = () => {
     e.preventDefault();
     setError('');
 
-    // Validações
     if (formData.password !== formData.confirmPassword) {
       setError('As senhas não coincidem');
       return;
@@ -56,7 +55,6 @@ const Register: React.FC = () => {
     setIsLoading(true);
 
     try {
-      // Check if this is the first user (should be admin)
       const existingUsers = JSON.parse(localStorage.getItem('oceanbreeze_users') || '[]');
       const isFirstUser = existingUsers.length === 0;
       

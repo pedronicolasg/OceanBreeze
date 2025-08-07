@@ -27,7 +27,6 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     if (savedTheme) {
       setIsDark(savedTheme === 'dark');
     } else {
-      // Detectar preferência do sistema
       setIsDark(window.matchMedia('(prefers-color-scheme: dark)').matches);
     }
   }, []);

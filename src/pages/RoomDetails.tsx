@@ -39,7 +39,6 @@ const RoomDetails: React.FC = () => {
         setRoomReviews(reviews);
         setAverageRating(getRoomAverageRating(id));
         
-        // Check if user already reviewed this room
         if (user) {
           const userReview = reviews.find(r => r.userId === user.id);
           if (userReview) {
@@ -54,7 +53,6 @@ const RoomDetails: React.FC = () => {
   }, [id, rooms, getRoomReviews, getRoomAverageRating, user]);
 
   useEffect(() => {
-    // Check availability when dates change
     if (bookingDates.checkIn && bookingDates.checkOut && room) {
       const availableRooms = getAvailableRooms(bookingDates.checkIn, bookingDates.checkOut);
       setIsAvailable(availableRooms.some(r => r.id === room.id));
@@ -67,7 +65,6 @@ const RoomDetails: React.FC = () => {
 
   const handleBookNow = async () => {
     if (!user) {
-      // Salvar a URL atual para redirecionar após o login
       localStorage.setItem('redirectAfterLogin', window.location.pathname);
       navigate('/login');
       return;
@@ -114,7 +111,6 @@ const RoomDetails: React.FC = () => {
       const success = await addReview(room.id, reviewForm.rating, reviewForm.comment);
       if (success) {
         alert('Avaliação enviada com sucesso!');
-        // Refresh reviews
         const reviews = getRoomReviews(room.id);
         setRoomReviews(reviews);
         setAverageRating(getRoomAverageRating(room.id));

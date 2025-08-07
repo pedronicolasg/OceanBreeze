@@ -15,7 +15,6 @@ interface BookingProviderProps {
   children: ReactNode;
 }
 
-// Dados iniciais de exemplo
 const initialRooms: Room[] = [
   {
     id: '1',
@@ -44,7 +43,89 @@ const initialRooms: Room[] = [
     amenities: ['Wi-Fi', 'Ar Condicionado', 'TV'],
     createdAt: new Date().toISOString(),
   },
+  {
+    id: '6',
+    name: 'Suíte Romântica',
+    description: 'Perfeita para casais, com iluminação suave, banheira para dois e vista para o pôr do sol.',
+    price: 380,
+    image: 'https://images.pexels.com/photos/271619/pexels-photo-271619.jpeg?auto=compress&cs=tinysrgb&w=800',
+    amenities: ['Wi-Fi', 'Ar Condicionado', 'TV', 'Banheira', 'Varanda'],
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: '7',
+    name: 'Quarto Família',
+    description: 'Amplo espaço com camas extras e estrutura ideal para famílias com crianças.',
+    price: 320,
+    image: 'https://images.pexels.com/photos/210604/pexels-photo-210604.jpeg?auto=compress&cs=tinysrgb&w=800',
+    amenities: ['Wi-Fi', 'Ar Condicionado', 'TV', 'Berço', 'Frigobar'],
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: '8',
+    name: 'Suíte Executiva',
+    description: 'Design moderno e confortável, ideal para viagens de negócios com área de trabalho.',
+    price: 400,
+    image: 'https://images.pexels.com/photos/373892/pexels-photo-373892.jpeg?auto=compress&cs=tinysrgb&w=800',
+    amenities: ['Wi-Fi', 'Ar Condicionado', 'TV', 'Mesa de Trabalho', 'Cofre'],
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: '9',
+    name: 'Cabana Rústica',
+    description: 'Hospede-se em uma charmosa cabana de madeira em meio à natureza.',
+    price: 260,
+    image: 'https://images.pexels.com/photos/271634/pexels-photo-271634.jpeg?auto=compress&cs=tinysrgb&w=800',
+    amenities: ['Wi-Fi', 'Lareira', 'Varanda', 'Frigobar'],
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: '10',
+    name: 'Quarto Panorâmico',
+    description: 'Vista deslumbrante da cidade em um quarto com janelas amplas e decoração minimalista.',
+    price: 370,
+    image: 'https://images.pexels.com/photos/271619/pexels-photo-271619.jpeg?auto=compress&cs=tinysrgb&w=800',
+    amenities: ['Wi-Fi', 'Ar Condicionado', 'TV', 'Vista para a Cidade'],
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: '11',
+    name: 'Loft Urbano',
+    description: 'Acomodação moderna com conceito aberto e decoração industrial, no centro da cidade.',
+    price: 410,
+    image: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800',
+    amenities: ['Wi-Fi', 'TV', 'Cozinha Compacta', 'Ar Condicionado'],
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: '13',
+    name: 'Quarto Pet Friendly',
+    description: 'Espaço ideal para quem viaja com seu pet, com comodidades adaptadas para animais de estimação.',
+    price: 250,
+    image: 'https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg?auto=compress&cs=tinysrgb&w=800',
+    amenities: ['Wi-Fi', 'Ar Condicionado', 'TV', 'Espaço Pet'],
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: '14',
+    name: 'Suíte Zen',
+    description: 'Ambiente tranquilo com decoração inspirada no estilo oriental, ideal para relaxar e meditar.',
+    price: 340,
+    image: 'https://images.pexels.com/photos/210265/pexels-photo-210265.jpeg?auto=compress&cs=tinysrgb&w=800',
+    amenities: ['Wi-Fi', 'Ar Condicionado', 'TV', 'Tatame', 'Jardim Interno'],
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: '15',
+    name: 'Apartamento Studio',
+    description: 'Studio completo com cozinha, ideal para estadias longas ou viagens de trabalho.',
+    price: 290,
+    image: 'https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=800',
+    amenities: ['Wi-Fi', 'Cozinha Completa', 'Ar Condicionado', 'TV'],
+    createdAt: new Date().toISOString(),
+  },
 ];
+
 
 export const BookingProvider: React.FC<BookingProviderProps> = ({ children }) => {
   const [rooms, setRooms] = useState<Room[]>([]);
@@ -56,7 +137,6 @@ export const BookingProvider: React.FC<BookingProviderProps> = ({ children }) =>
   });
 
   useEffect(() => {
-    // Carregar dados do localStorage
     const savedRooms = localStorage.getItem('oceanbreeze_rooms');
     const savedReservations = localStorage.getItem('oceanbreeze_reservations');
     const savedReviews = localStorage.getItem('oceanbreeze_reviews');
@@ -64,7 +144,6 @@ export const BookingProvider: React.FC<BookingProviderProps> = ({ children }) =>
     if (savedRooms) {
       setRooms(JSON.parse(savedRooms));
     } else {
-      // Usar dados iniciais se não houver dados salvos
       setRooms(initialRooms);
       localStorage.setItem('oceanbreeze_rooms', JSON.stringify(initialRooms));
     }
@@ -91,7 +170,6 @@ export const BookingProvider: React.FC<BookingProviderProps> = ({ children }) =>
         const resCheckIn = new Date(reservation.checkInDate);
         const resCheckOut = new Date(reservation.checkOutDate);
         
-        // Verificar se há sobreposição de datas
         return (checkInDate < resCheckOut && checkOutDate > resCheckIn);
       });
     });
@@ -102,7 +180,6 @@ export const BookingProvider: React.FC<BookingProviderProps> = ({ children }) =>
       const room = rooms.find(r => r.id === roomId);
       if (!room) return false;
 
-      // Verificar disponibilidade novamente
       const availableRooms = getAvailableRooms(checkIn, checkOut);
       if (!availableRooms.find(r => r.id === roomId)) {
         return false;
@@ -138,10 +215,8 @@ export const BookingProvider: React.FC<BookingProviderProps> = ({ children }) =>
       const user = JSON.parse(localStorage.getItem('oceanbreeze_user') || '{}');
       if (!user.id) return false;
 
-      // Check if user already reviewed this room
       const existingReview = reviews.find(r => r.roomId === roomId && r.userId === user.id);
       if (existingReview) {
-        // Update existing review
         const updatedReviews = reviews.map(r => 
           r.id === existingReview.id 
             ? { ...r, rating, comment, createdAt: new Date().toISOString() }
@@ -150,7 +225,6 @@ export const BookingProvider: React.FC<BookingProviderProps> = ({ children }) =>
         setReviews(updatedReviews);
         localStorage.setItem('oceanbreeze_reviews', JSON.stringify(updatedReviews));
       } else {
-        // Create new review
         const newReview: Review = {
           id: Date.now().toString(),
           userId: user.id,
