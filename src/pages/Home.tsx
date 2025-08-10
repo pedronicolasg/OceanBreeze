@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { Search, MapPin, Star, Wifi, Car } from "lucide-react";
+import { Search } from "lucide-react";
 import { useBooking } from "../contexts/BookingContext";
 import DatePicker from "../components/UI/DatePicker";
 
@@ -13,9 +13,12 @@ const Home: React.FC = () => {
     getAvailableRooms,
     getRoomAverageRating,
   } = useBooking();
+
   const [displayRooms, setDisplayRooms] = useState<any[]>([]);
   const [isSearching, setIsSearching] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
+
+  const quartosRef = useRef<HTMLElement>(null);
 
   const today = new Date().toISOString().split("T")[0];
   const tomorrow = new Date(Date.now() + 24 * 60 * 60 * 1000)
@@ -41,16 +44,23 @@ const Home: React.FC = () => {
     }
 
     setIsSearching(true);
+
     setTimeout(() => {
-      const rooms = getAvailableRooms(
+      const availableRooms = getAvailableRooms(
         searchDates.checkIn,
         searchDates.checkOut
       );
-      setDisplayRooms(rooms);
+      setDisplayRooms(availableRooms);
       setHasSearched(true);
 
-      // Faz a rolagem suave para a seção de quartos
-      document.getElementById("quartos")?.scrollIntoView({ behavior: "smooth" });
+      setTimeout(() => {
+        const element = quartosRef.current;
+        if (element) {
+          const top =
+            element.getBoundingClientRect().top + window.pageYOffset - 80; // ajuste para header fixo se tiver
+          window.scrollTo({ top, behavior: "smooth" });
+        }
+      }, 100);
 
       setIsSearching(false);
     }, 500);
@@ -126,8 +136,7 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Seção dos quartos com ID para scroll */}
-      <section id="quartos" className="py-16 px-4">
+      <section id="quartos" ref={quartosRef} className="py-16 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
@@ -143,14 +152,30 @@ const Home: React.FC = () => {
                 : "Descubra nossos quartos exclusivos com vista para o mar"}
             </p>
           </div>
-          {/* ... resto da seção permanece igual */}
+          {/* Aqui você pode renderizar a lista dos quartos */}
+          {displayRooms.length === 0 && hasSearched && (
+            <p className="text-center text-gray-500">
+              Nenhum quarto disponível para as datas selecionadas.
+            </p>
+          )}
+          {displayRooms.map((room) => (
+            <div
+              key={room.id}
+              className="border rounded-lg p-4 mb-6 shadow hover:shadow-lg cursor-pointer"
+              onClick={() => handleViewDetails(room.id)}
+            >
+              <h3 className="text-xl font-semibold mb-2">{room.name}</h3>
+              <p>Preço: R$ {room.price.toFixed(2)}</p>
+              <p>Classificação média: {getRoomAverageRating(room.id).toFixed(1)}</p>
+              {/* Adicione outros detalhes do quarto aqui */}
+            </div>
+          ))}
         </div>
       </section>
-
-      {/* Resto do código igual */}
     </div>
   );
 };
 
 export default Home;
+
 
